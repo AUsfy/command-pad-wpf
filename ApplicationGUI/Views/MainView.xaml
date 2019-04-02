@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="CmdProject.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:md="clr-namespace:Models;assembly=Models"
+             xmlns:local="clr-namespace:CmdProject.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="525" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" HorizontalAlignment="left" Margin="10,20,5,5" Command="{Binding DataContext.DisplayCommandView, RelativeSource=
+               {RelativeSource AncestorType={x:Type local:MainWindowView} }, Mode=OneWay}" Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                 ToolTip="Resource name: MaterialDesignRaisedDarkButton">
+            Add Command
+        </Button>
+
+        <ListView   Grid.Row="1" SelectionMode="Single" 
+                   x:Name="ListCmds" 
+             Margin="5,10,40,5.333" SelectedItem="{Binding DataContext.SelectedCommand, 
+                                                RelativeSource={RelativeSource AncestorType=local:MainWindowView}}"
+                  ItemsSource="{Binding DataContext.CommandList , RelativeSource={RelativeSource AncestorType=local:MainWindowView}}"
+                    >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" >
+                        <StackPanel.InputBindings>
+                            <MouseBinding MouseAction="LeftDoubleClick" 
+                                                  Command="{Binding DataContext.SelectedCommandCmd, 
+                                                RelativeSource={RelativeSource AncestorType=local:MainWindowView}}" 
+                                              />
+                        </StackPanel.InputBindings>
+
+                        <Button Style ="{StaticResource TransparentStyle}" Grid.Row="3" Height="30" HorizontalAlignment="Left" Name="buttonPlay"  Width="30" Command="{Binding DataContext.PlayCommand, RelativeSource={RelativeSource AncestorType=local:MainWindowView}}" 
+                                CommandParameter= "{Binding }">
+                            <Image Name="ButtonImage">
+                                <Image.Style>
+                                    <Style TargetType="{x:Type Image}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Status,  NotifyOnSourceUpdated=True}" Value="{x:Static md:CommandStatus.Inactive}">
+                                                <Setter Property="Source" Value="Resources/icons/play.png" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Status ,NotifyOnSourceUpdated=True}" Value="{x:Static md:CommandStatus.Running}">
+                                                <Setter Property="Source" Value="Resources/icons/stop.png" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </Button>
+                        <TextBlock Margin="15,10,0,0" Height ="24" MinWidth="200" HorizontalAlignment="Right" Text="{Binding Path=CommandModel.CommandName}"></TextBlock>
+                        <Rectangle  HorizontalAlignment="Stretch"  VerticalAlignment="Center" Fill="Black" Height="4"/>
+
+
+                    </StackPanel>
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</UserControl>
