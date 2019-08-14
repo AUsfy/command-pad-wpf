@@ -1,13 +1,13 @@
-# Command Pad
+# Command Pad WPF
 
 Simple desktop application (wpf) for running command line tasks.
 You can add, modify, start and stop your command line tasks.
 This is a Net implementation of the [command pad](https://github.com/supnate/command-pad).
 
 **Implementation details:**  
-The implementation follows MVVM design pattern.
-The view integrated MaterialDesign.
-Sqlite db was used to store the commands.
+* The implementation follows MVVM design pattern.  
+* The view uses MaterialDesign.  
+* Sqlite db was used to store the commands. 
 
 **Screenshots:**
 
