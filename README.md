@@ -2,7 +2,7 @@
 
 Simple desktop application (wpf) for running command line tasks.
 You can add, modify, start and stop your command line tasks.
-This is a Net implementation of the [command pad](https://github.com/supnate/command-pad).
+This is a .Net implementation of the [command pad](https://github.com/supnate/command-pad).
 
 **Implementation details:**  
 * The implementation follows MVVM design pattern.  
